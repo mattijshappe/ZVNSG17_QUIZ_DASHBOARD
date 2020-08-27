@@ -1,0 +1,184 @@
+{
+	"_version": "1.5.0",
+	"start_url": "start.html",
+	"sap.app": {
+		"id": "ZVNSG17_QUIZ_DASHBOARD",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.2.2"
+		},
+		"title": "{{app_title}}",
+		"description": "{{app_description}}",
+		"ach": "sap",
+		"resources": "resources.json",
+		"dataSources": {
+			"ZVNSG17_C_ANL_QUIZRESULTST_CDS": {
+				"uri": "/sap/opu/odata/sap/ZVNSG17_C_ANL_QUIZRESULTST_CDS/",
+				"type": "OData",
+				"settings": {
+					"annotations": [
+						"ZVNSG17_C_ANL_QUIZRESULTST_C_VAN",
+						"ZVNSG17_C_ANL_QUIZRESULTST_C_VAN1"
+					],
+					"localUri": "localService/ZVNSG17_C_ANL_QUIZRESULTST_CDS/metadata.xml"
+				}
+			},
+			"ZVNSG17_C_ANL_QUIZRESULTST_C_VAN": {
+				"uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZVNSG17_C_ANL_QUIZRESULTST_C_VAN',Version='0001')/$value/",
+				"type": "ODataAnnotation",
+				"settings": {
+					"localUri": "localService/ZVNSG17_C_ANL_QUIZRESULTST_CDS/ZVNSG17_C_ANL_QUIZRESULTST_C_VAN.xml"
+				}
+			},
+			"ZVNSG17_C_ANL_QUIZRESULTST_C_VAN1": {
+				"uri": "localService/ZVNSG17_C_ANL_QUIZRESULTST_CDS/ZVNSG17_C_ANL_QUIZRESULTST_C_VAN.xml",
+				"type": "ODataAnnotation",
+				"settings": {
+					"localUri": "localService/ZVNSG17_C_ANL_QUIZRESULTST_CDS/ZVNSG17_C_ANL_QUIZRESULTST_C_VAN.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "OVP.cardtemplate",
+			"version": "0.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "1.32.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.f": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {},
+				"sap.ovp": {}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"ZVNSG17_C_ANL_QUIZRESULTST_CDS": {
+				"dataSource": "ZVNSG17_C_ANL_QUIZRESULTST_CDS",
+				"settings": 
+				{
+          "useBatch" : true
+				}
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			}
+		},
+		"extends": {
+			"extensions": {}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		}
+	},
+	"sap.ovp": {
+		"globalFilterModel": "ZVNSG17_C_ANL_QUIZRESULTST_CDS",
+		"globalFilterEntityType": "zvnsg17_c_anl_quizresultstType",
+		"cards": {
+			"ZVNSG17_QUIZ_DASHBOARD_card00": {
+				"model": "ZVNSG17_C_ANL_QUIZRESULTST_CDS",
+				"template": "sap.ovp.cards.list",
+				"settings": {
+					"title": "{{ZVNSG17_QUIZ_DASHBOARD_card00_title}}",
+					"entitySet": "zvnsg17_c_anl_quizresultst",
+					"listType": "extended",
+					"listFlavor": "bar",
+					"sortBy": "sum_incorrect",
+					"sortOrder": "descending",
+					"addODataSelect": "true",
+					"dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#wrongAnswerCount",
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem#questions"
+				}
+			},
+			"ZVNSG17_QUIZ_DASHBOARD_card01": {
+				"model": "ZVNSG17_C_ANL_QUIZRESULTST_CDS",
+				"template": "sap.ovp.cards.charts.analytical",
+				"settings": {
+					"title": "{{ZVNSG17_QUIZ_DASHBOARD_card01_title}}",
+					"entitySet": "Zvnsg17_C_Anl_Quizrlts_Tot",
+					"selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant",
+					"chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#ordNetChart",
+					"presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant",
+					"dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#measure",
+					"identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification"
+				}
+			},
+			"ZVNSG17_QUIZ_DASHBOARD_card02": {
+				"model": "ZVNSG17_C_ANL_QUIZRESULTST_CDS",
+				"template": "sap.ovp.cards.list",
+				"settings": {
+					"title": "{{ZVNSG17_QUIZ_DASHBOARD_card02_title}}",
+					"entitySet": "Zvnsg17_C_Anl_Quizrlts_Tot",
+					"listType": "condensed",
+					"listFlavor": "standard",
+					"sortBy": "measure",
+					"sortOrder": "descending",
+					"addODataSelect": "true",
+					"dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#measure",
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem#questions"
+				}
+			},
+			"ZVNSG17_QUIZ_DASHBOARD_card03": {
+				"model": "ZVNSG17_C_ANL_QUIZRESULTST_CDS",
+				"template": "sap.ovp.cards.list",
+				"settings": {
+					"title": "{{ZVNSG17_QUIZ_DASHBOARD_card03_title}}",
+					"entitySet": "zvnsg17_c_anl_quizresultst",
+					"listType": "extended",
+					"listFlavor": "bar",
+					"sortBy": "correct",
+					"sortOrder": "descending",
+					"addODataSelect": "true",
+					"dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#correctAnswerCount",
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem#top3"
+				}
+			},
+			"ZVNSG17_QUIZ_DASHBOARD_card04": {
+				"model": "ZVNSG17_C_ANL_QUIZRESULTST_CDS",
+				"template": "sap.ovp.cards.list",
+				"settings": {
+					"title": "{{ZVNSG17_QUIZ_DASHBOARD_card04_title}}",
+					"entitySet": "zvnsg17_c_quiz_score",
+					"listType": "extended",
+					"listFlavor": "standard",
+					"sortBy": "quiz_id",
+					"sortOrder": "descending",
+					"addODataSelect": "true",
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem#Score"
+				}
+			}
+		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zvnsg_quiz_dbrd/webapp",
+		"_version": "1.1.0"
+	}
+}

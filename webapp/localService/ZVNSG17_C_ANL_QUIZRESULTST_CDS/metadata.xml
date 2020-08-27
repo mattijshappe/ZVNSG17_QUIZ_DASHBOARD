@@ -1,0 +1,55 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="sap.com.cds_zvnsg17_c_anl_quizresultst" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="zvnsg17_c_anl_quizresultstType" sap:label="Consumption View totals per question" sap:semantics="aggregate" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="quiz_id" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Quiz Id"/>
+                <Property Name="email" Type="Edm.String" MaxLength="241" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="E-Mail Address"/>
+                <Property Name="question_id" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="VraagId"/>
+                <Property Name="correct" Type="Edm.Byte" sap:aggregation-role="dimension"/>
+                <Property Name="sum_incorrect" Type="Edm.Byte" sap:aggregation-role="measure"/>
+                <Property Name="unanswered" Type="Edm.Byte" sap:aggregation-role="dimension"/>
+                <Property Name="question_short_text" Type="Edm.String" MaxLength="100" sap:aggregation-role="dimension" sap:label="Korte vraag"/>
+                <NavigationProperty Name="to_totals_answer_cat" Relationship="sap.com.cds_zvnsg17_c_anl_quizresultst.assoc_21922E3806F37D068F5D6EA3AD2055D6" FromRole="FromRole_assoc_21922E3806F37D068F5D6EA3AD2055D6" ToRole="ToRole_assoc_21922E3806F37D068F5D6EA3AD2055D6" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Zvnsg17_C_Anl_Quizrlts_TotType" sap:label="Total quiz resuls" sap:semantics="aggregate" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="email" Type="Edm.String" MaxLength="241" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="E-Mail Address"/>
+                <Property Name="answer_type" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase"/>
+                <Property Name="measure" Type="Edm.Byte" sap:aggregation-role="measure"/>
+                <Property Name="quiz_id" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Quiz Id"/>
+                <Property Name="question_id" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="VraagId"/>
+            </EntityType>
+            <Association Name="assoc_21922E3806F37D068F5D6EA3AD2055D6" sap:content-version="1">
+                <End Type="sap.com.cds_zvnsg17_c_anl_quizresultst.zvnsg17_c_anl_quizresultstType" Multiplicity="1" Role="FromRole_assoc_21922E3806F37D068F5D6EA3AD2055D6"/>
+                <End Type="sap.com.cds_zvnsg17_c_anl_quizresultst.Zvnsg17_C_Anl_Quizrlts_TotType" Multiplicity="*" Role="ToRole_assoc_21922E3806F37D068F5D6EA3AD2055D6"/>
+            </Association>
+            <EntityContainer Name="sap.com.cds_zvnsg17_c_anl_quizresultst_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Zvnsg17_C_Anl_Quizrlts_Tot" EntityType="sap.com.cds_zvnsg17_c_anl_quizresultst.Zvnsg17_C_Anl_Quizrlts_TotType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="zvnsg17_c_anl_quizresultst" EntityType="sap.com.cds_zvnsg17_c_anl_quizresultst.zvnsg17_c_anl_quizresultstType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_21922E3806F37D068F5D6EA3AD2055D6" Association="sap.com.cds_zvnsg17_c_anl_quizresultst.assoc_21922E3806F37D068F5D6EA3AD2055D6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zvnsg17_c_anl_quizresultst" Role="FromRole_assoc_21922E3806F37D068F5D6EA3AD2055D6"/>
+                    <End EntitySet="Zvnsg17_C_Anl_Quizrlts_Tot" Role="ToRole_assoc_21922E3806F37D068F5D6EA3AD2055D6"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZVNSG17_C_ANL_QUIZRESULTST_CDS/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZVNSG17_C_ANL_QUIZRESULTST_CDS/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
